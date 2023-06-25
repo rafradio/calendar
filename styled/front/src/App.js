@@ -27,6 +27,8 @@ function App() {
   const wrapperRef = useRef(null);
   const deleteRef = useRef(null);
   const [childrens, setChildrens] = useState([]);
+  const [interviews, setInterviews] = useState([]);
+  const [interwiewToDelete, setInterwiewToDelete] = useState(null);
 
   useEffect(() => {
     setDay(date.getDate());
@@ -58,14 +60,23 @@ function App() {
     let workTime = (workPlan != null) ? new Date(workPlan) : null;
     let myDay = (workTime.getDay() == 0) ? 6 : workTime.getDay()-1;
     let myHours = workTime.getHours();
-    childrens[myHours*7 + myDay].style.backgroundColor = "#f5f6fa";
-    console.log("Plus button: ", workTime);
+    let index = myHours*7 + myDay;
+    childrens[myHours*7 + myDay].style.backgroundColor = "#e3e4fd";
+    setInterviews([...interviews, index]);
+    // console.log("Plus button: ", interviews);
   }
 
-  const workBgrnd = (index) => {
-    // let childrens = Array.from(wrapperRef.current.children);
-    childrens[index].style.backgroundColor = "#bcc9fa";
-    deleteRef.current.style.display = 'flex';
+  const workBgrnd = (index, data) => {
+    if (data.includes(index)) {
+      childrens[index].style.backgroundColor = "#b3b7ff";
+      deleteRef.current.style.display = 'flex';
+      setInterwiewToDelete(index);
+    }
+    console.log("Data: ", data);
+  }
+
+  const deleteInterview = (indexToDelete) => {
+    childrens[indexToDelete].style.backgroundColor = "transparent";
   }
 
   return (
@@ -115,10 +126,10 @@ function App() {
           <Button onClick={() => setDate(new Date(year, month, day + 7))}>{'>'}</Button>
         </Body>
       </Header>
-      <Workarea giveRef={wrapperRef} workBgrnd={workBgrnd}></Workarea>
+      <Workarea giveRef={wrapperRef} workBgrnd={workBgrnd} data={interviews}></Workarea>
       <Header initial>
         <FooterBlock>Today</FooterBlock>
-        <FooterBlock deleteBtn ref={deleteRef}>Delete</FooterBlock>
+        <FooterBlock deleteBtn ref={deleteRef} onClick={() => deleteInterview(interwiewToDelete)}>Delete</FooterBlock>
       </Header>
     </Frame>
     

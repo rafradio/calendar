@@ -4,6 +4,7 @@ import {Frame, Day, Header, Button, Body, Column, WorkBlock, Hours, BodyWork} fr
 function Workarea(props) {
     const wrapperRef = props.giveRef;
     const workBgrnd = props.workBgrnd;
+    const data = props.data;
     
 
     return (
@@ -25,7 +26,7 @@ function Workarea(props) {
                 {Array(168)
                     .fill(null)
                     .map((_, index) => 
-                            <WorkBlock key={index} onClick={() => workBgrnd(index)}>
+                            <WorkBlock key={index} onClick={() => workBgrnd(index, data)}>
                             
                             </WorkBlock>
                     )
