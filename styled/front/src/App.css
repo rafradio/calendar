@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Roboto Flex', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #ffffff;
+}
