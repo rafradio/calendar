@@ -25,6 +25,7 @@ function App() {
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
   const [week, setWeek] = useState([]);
   const wrapperRef = useRef(null);
+  const deleteRef = useRef(null);
   const [childrens, setChildrens] = useState([]);
 
   useEffect(() => {
@@ -55,11 +56,16 @@ function App() {
   const plusButton = () => {
     let workPlan = prompt("Enter event time\nYYYY-MM-DD HH:mm:ss", "");
     let workTime = (workPlan != null) ? new Date(workPlan) : null;
-    // let myDay = workTime.getDay();
     let myDay = (workTime.getDay() == 0) ? 6 : workTime.getDay()-1;
     let myHours = workTime.getHours();
     childrens[myHours*7 + myDay].style.backgroundColor = "#f5f6fa";
     console.log("Plus button: ", workTime);
+  }
+
+  const workBgrnd = (index) => {
+    // let childrens = Array.from(wrapperRef.current.children);
+    childrens[index].style.backgroundColor = "#bcc9fa";
+    deleteRef.current.style.display = 'flex';
   }
 
   return (
@@ -109,10 +115,10 @@ function App() {
           <Button onClick={() => setDate(new Date(year, month, day + 7))}>{'>'}</Button>
         </Body>
       </Header>
-      <Workarea giveRef={wrapperRef}></Workarea>
+      <Workarea giveRef={wrapperRef} workBgrnd={workBgrnd}></Workarea>
       <Header initial>
         <FooterBlock>Today</FooterBlock>
-        <FooterBlock>Delete</FooterBlock>
+        <FooterBlock deleteBtn ref={deleteRef}>Delete</FooterBlock>
       </Header>
     </Frame>
     

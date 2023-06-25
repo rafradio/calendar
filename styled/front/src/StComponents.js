@@ -80,7 +80,7 @@ const WorkBlock = styled.div`
     transform: ${(props) => (props.hours && 'translateY(50%)') || 'translateY(0)'};
 `
 const FooterBlock = styled.div`
-    display: flex;
+    display: ${(props) => (props.deleteBtn && 'none') || 'flex'};
 `
 
 

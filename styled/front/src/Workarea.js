@@ -3,10 +3,8 @@ import {Frame, Day, Header, Button, Body, Column, WorkBlock, Hours, BodyWork} fr
 
 function Workarea(props) {
     const wrapperRef = props.giveRef;
-    const workBgrnd = (index) => {
-        let childrens = Array.from(wrapperRef.current.children);
-        childrens[index].style.backgroundColor = "#bcc9fa";
-    }
+    const workBgrnd = props.workBgrnd;
+    
 
     return (
         <Body workarea>
