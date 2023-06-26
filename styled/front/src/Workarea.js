@@ -12,10 +12,10 @@ function Workarea(props) {
             <Hours>
                 {Array(23)
                     .fill(null)
-                    .map((_, index) => {
+                    .map((element, index) => {
                             let str = (index < 9) ? "0" + String(index+1): String(index+1);
                             return (
-                                <WorkBlock hours key={index}>
+                                <WorkBlock hours key={index.toString()}>
                                     {str + ".00"}
                                 </WorkBlock>
                             );
@@ -25,8 +25,8 @@ function Workarea(props) {
             <BodyWork ref={wrapperRef}>
                 {Array(168)
                     .fill(null)
-                    .map((_, index) => 
-                            <WorkBlock key={index} onClick={() => workBgrnd(index, data)}>
+                    .map((element, index) => 
+                            <WorkBlock key={index.toString()} onClick={() => workBgrnd(index, data)}>
                             
                             </WorkBlock>
                     )
